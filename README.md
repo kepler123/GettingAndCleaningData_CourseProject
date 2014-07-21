@@ -38,13 +38,12 @@ Internally, the script works as follows:
 2. The data is then further processed:
   1. The two data frames representing training and test data are merged into one data frame.
   2. The merged data frame is further transformed by:
-    1. Collapsing/flattening it so that a pair of { subject ID, activity ID } is represented by only a single row in the output data frame, along with the relevant measurement data for the pair.
-    2. Calculating averages (means) of the various mean and standard deviation measurement data extracted for each pair of subject ID and activity ID.
-    3. Tidying up the column names for the measurements columns, with the chosen convention to:
+    1. Collapsing/flattening it so that a pair of { subject ID, activity ID } is represented by only a single row in the output data frame, along with the relevant measurement data for the pair. This relevant measurement data is calculated as averages (means) of the various mean and standard deviation measurement data extracted for each pair of subject ID and activity ID.
+    2. Tidying up the column names for the measurements columns. A convention was chosen to:
       1. clearly identify the "domain" of the measurement, as "Time" vs. "Frequency" e.g. Time.Body.Accel.Mean.X, Frequency.Body.Accel.Mean.X.
       2. more clearly identify the data sources as accelerometer vs. gyroscope as "Accel", "Gyro";
       3. identify the mean/average measurements as "Mean";
-      4. identify the standard deviation measurements as "StdDev", which is a standard acronym for standard deviation;
-      5. some tradeoffs between pure tidyness vs. readability of the output were made, as far as these columns names: the names are not 100% spelled out but contain just enough hints to allow reader to understand data clearer, without making the column names too long.
+      4. identify the standard deviation measurements as "StdDev", which is a commonly used acronym for standard deviation.
+      5. Note that some tradeoffs between pure tidyness vs. readability of the output were made, as far as these columns names: the names are not 100% spelled out but contain just enough hints to allow reader to understand data clearer, without making the column names too long.
 3. The tidied up data set is consequently persisted into the working directory, as a CSV file named "tidy_dataset.csv".
 
