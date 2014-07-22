@@ -19,7 +19,10 @@ The run_analysis.R script, per the assignment, does the following:
 4. Appropriately labels the data set with descriptive variable names. 
 5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
-The script outputs this final, tidy data set into a CSV file in the working directory. The file's name is tidy_dataset.csv.
+The script outputs this final, tidy data set into a CSV file in the working directory.
+
+The file's name is tidy_dataset.csv.txt. (The extra .txt extension can be removed; it had to be added since Coursera's
+project submission interface does not allow CSV files to be uploaded and only supports: txt, png, jpg, gif, pdf).
 
 <hr/>
 
