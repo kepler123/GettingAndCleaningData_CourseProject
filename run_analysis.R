@@ -88,25 +88,33 @@ mergeData <- function(df1, df2) {
 # respective averages of mean and standard deviation measurement data, one such set of data per row.
 transformData <- function(df) {
     df <- ddply(df, c("Subject.ID", "Activity.Type"), numcolwise(mean))
-    df <- tidyUpColumns(df)
+    df <- adjustMeasurementColumns(df)
     df
 }
 
-# Labels the data set with descriptive variable names by tidying up the measurement
-# variable column names.
+# Labels the measurements data set with column names that are easier to process
 #
 # Inputs: the data frame.
 # Outputs: none.
 #
-# Note: one might argue whether these are tidy column names or not. A certain amount
-# of shortening and use of acronyms (like StdDev instead of "StandardDeviation") is
-# done in order to avoid having column names that are too long (which reduces
-# the readability of the output data set).
-tidyUpColumns <- function(df) {
-    names(df) <- gsub("tBody", "Time.Body.", names(df))
-    names(df) <- gsub("tGravity", "Time.Gravity.", names(df))
-    names(df) <- gsub("fBody", "Frequency.Body.", names(df))
-    names(df) <- gsub("Acc", "Accel", names(df))
+adjustMeasurementColumns <- function(df) {
+    names(df) <- gsub("tBodyAcc", "Time.BodyAccel", names(df))
+    names(df) <- gsub("tGravityAcc", "Time.GravityAccel", names(df))
+    names(df) <- gsub("tBodyAccJerk", "Time.BodyAccelJerk", names(df))
+    names(df) <- gsub("tBodyGyro", "Time.BodyGyro.", names(df))
+    names(df) <- gsub("tBodyGyroJerk", "Time.BodyGyroJerk", names(df))
+    names(df) <- gsub("tBodyAccMag", "Time.BodyAccelMag", names(df))
+    names(df) <- gsub("tGravityAccMag", "Time.GravityAccelMag", names(df))
+    names(df) <- gsub("tBodyAccJerkMag", "Time.BodyAccelJerkMag", names(df))
+    names(df) <- gsub("tBodyGyroMag", "Time.BodyGyroMag", names(df))
+    names(df) <- gsub("tBodyGyroJerkMag", "Time.BodyGyroJerkMag", names(df))
+    names(df) <- gsub("fBodyAcc", "Freq.BodyAcc", names(df))
+    names(df) <- gsub("fBodyAccJerk", "Freq.BodyAccelJerk", names(df))
+    names(df) <- gsub("fBodyGyro", "Freq.BodyGyro", names(df))
+    names(df) <- gsub("fBodyAccMag", "Freq.BodyAccelMag", names(df))
+    names(df) <- gsub("fBodyBodyAccJerkMag", "Freq.BodyAccelJerkMag", names(df))
+    names(df) <- gsub("fBodyBodyGyroMag", "Freq.BodyGyroMag", names(df))
+    names(df) <- gsub("fBodyBodyGyroJerkMag", "Freq.BodyGyroJerkMag", names(df))
     
     names(df) <- gsub("-mean\\(\\)-", ".Mean.", names(df))
     names(df) <- gsub("-std\\(\\)-", ".StdDev.", names(df))
@@ -202,8 +210,6 @@ readSpaceSeparatedData <- function(file) {
     lines <- readLines(con)
     dat <- read.table(text=lines[grep("^[^#]", lines)], stringsAsFactors=FALSE)
     close(con)
-    # TODO this must already be a df
-    # as.data.frame(dat)
     dat
 }
 
@@ -215,8 +221,6 @@ readTableData <- function(file) {
     lines <- readLines(con)
     dat <- read.table(text=lines, stringsAsFactors=FALSE)
     close(con)
-    # TODO this must already be a df
-    # as.data.frame(dat)
     dat
 }
 
