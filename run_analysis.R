@@ -129,7 +129,7 @@ adjustMeasurementColumns <- function(df) {
 # Inputs: the tidy data frame and the name of the file to write to.
 # Outputs: none.
 persistOutput <- function(df, filename) {
-    write.csv(df, filename, row.names=FALSE)
+    write.csv(df, filename, row.names=FALSE, quote=FALSE)
 }
 
 # Loads a single subset of data that is a part of the human activity dataset.
